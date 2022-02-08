@@ -1,8 +1,33 @@
-const span = document.getElementById('result')
-const equals = document.getElementById('equals')
+const output = document.getElementById('result');
+const buttons = document.querySelectorAll('.sign');
+let opVal = '';
 
 
-equals.addEventListener('click', () => {
-    // console.log("Click")
-    span.innerText = 'Click'
-})
+for (item of buttons) {
+    item.addEventListener('click', (e) => {
+        buttonText = e.target.innerText;
+        if (buttonText == 1) {
+            opVal += buttonText;
+            output.innerText = opVal;
+        }
+        else if (buttonText == 'AC') {
+            opVal = '';
+            output.innerText = opVal
+        }
+        else if (buttonText == '=') {
+            try {
+                output.innerText = eval(opVal)
+            }
+            catch (e) {
+                // alert('Syntax error');
+                opVal  = 'Syntax Error';
+                output.innerText = opVal;
+            }
+        }
+        else {
+            opVal += buttonText;
+            output.innerText = opVal;
+        }
+    })
+}
+
